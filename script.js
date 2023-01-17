@@ -75,6 +75,9 @@ if(check){
 
 
 // mehsula endirim edilmesi
+
+const discount = () => {
+    
 let price = prompt("MEHSULUN CARI QIYMETINI DAXIL ET")
 console.log("DAXIL EDILEN QIYMET : ", price)
  price = Number(price);
@@ -84,10 +87,12 @@ discount = Number(discount);
 let beginDateString = prompt(`ENDIRIMIN BASHLANMA TARIXI
 IL-AY-GUN
 `);
+console.log(beginDateString)
 let beginDate = new Date(beginDateString);
 let endDateString = prompt(`ENDIRIMIN BITME TARIXI
 IL-AY-GUN
 `);
+console.log(endDateString)
 let endDate = new Date(endDateString);
 
 let currenDate = new Date();
@@ -114,17 +119,63 @@ let msecCurrentdate = Date.now();
 
 // TARIXLERIN YOXLANILMASI
 
-if(msecBeginDate < msecCurrentdate){
-    window.alert(("endirim kecmis tarixden baslaya bilmez").toUpperCase())
-}
-else if(msecBeginDate >= msecEndDate){
-    window.alert(("endirim muddeti menfi ola bilmez").toUpperCase())
-}
-else if(isNaN(price) == true){
-    window.alert("QIYMET DUZGUN FORMATDA DEYIL").toUpperCase()
-}
-else{
- let discountDay =(msecEndDate - msecBeginDate)/1000/60/60/24;
+// if(isNaN(beginDate)){
+//     window.alert(("endirimin baslanma tarixi duzgun formatda deyil").toUpperCase())
+// }
+// else if(isNaN(endDate)){
+//     window.alert(("endirimin bitme tarixi duzgun formatda deyil").toUpperCase())
+// }
+// else if(msecBeginDate < msecCurrentdate){
+//     window.alert(("endirim kecmis tarixden baslaya bilmez").toUpperCase())
+// }
+// else if(msecBeginDate >= msecEndDate){
+//     window.alert(("endirim muddeti menfi ola bilmez").toUpperCase())
+// }
+// else if(isNaN(price) == true){
+//     window.alert("QIYMET DUZGUN FORMATDA DEYIL").toUpperCase()
+// }
+// else if(isNaN(discount)){
+//     window.alert(("endirim DUZGUN FORMATDA DEYIL").toUpperCase())
+// }
+// else{
+//  let discountDay =(msecEndDate - msecBeginDate)/1000/60/60/24;
+//  let resudieDay = Math.floor((msecBeginDate - msecCurrentdate)/1000/60/60/24);
+
+// console.log(("endirim muddeti:  ").toUpperCase(),discountDay, "  gun");
+
+// console.log(`ENDIRIMLERE ${resudieDay} GUN QALDI`);
+
+// console.log(`
+// MEHSULUN CARI QIYMETI: ${price}
+// ENDIRILMISH QIYMET:    ${(price -= Math.floor(price*discount/100))}
+// `)
+
+// }
+
+switch(true){
+    case (isNaN(beginDate)): window.alert(("endirimin baslanma tarixi duzgun formatda deyil").toUpperCase());
+    break;
+
+    case (isNaN(endDate)): window.alert(("endirimin bitme tarixi duzgun formatda deyil").toUpperCase());
+    break;
+
+    case (msecBeginDate < msecCurrentdate): window.alert(("endirim kecmis tarixden baslaya bilmez").toUpperCase());
+    break;
+
+    case (msecBeginDate >= msecEndDate): window.alert(("endirim muddeti menfi ola bilmez").toUpperCase);
+    break;
+
+    case (isNaN(price)): window.alert("QIYMET DUZGUN FORMATDA DEYIL").toUpperCase();
+    break;
+
+    case (isNaN(discount)): window.alert(("endirim DUZGUN FORMATDA DEYIL").toUpperCase());
+    break;
+
+    case ((price -= Math.floor(price*discount/100)) <= 0):  window.alert(("Mehsul menfi qiymetle satila bilmez").toUpperCase());
+    break;
+
+    default: 
+    let discountDay =(msecEndDate - msecBeginDate)/1000/60/60/24;
  let resudieDay = Math.floor((msecBeginDate - msecCurrentdate)/1000/60/60/24);
 
 console.log(("endirim muddeti:  ").toUpperCase(),discountDay, "  gun");
@@ -132,12 +183,12 @@ console.log(("endirim muddeti:  ").toUpperCase(),discountDay, "  gun");
 console.log(`ENDIRIMLERE ${resudieDay} GUN QALDI`);
 
 console.log(`
-MEHSULUN CARI QIYMETI: ${price}
-ENDIRILMISH QIYMET:    ${(price -= Math.floor(price*discount/100))}
-`)
-
-
-
-
+MEHSULUN CARI QIYMETI: ${price} Manat
+ENDIRILMISH QIYMET:    ${(price -= Math.floor(price*discount/100))} Manat
+`) 
 
 }
+
+} 
+
+// discount()
